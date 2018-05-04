@@ -4,6 +4,8 @@ $('body').click(function(){
   console.log('asdasdasdasd')
   alert(1)
 })
+import data from '../data/a.json'
+console.log(data)
 
 let func =()=>{}
 

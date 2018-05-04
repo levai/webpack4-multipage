@@ -11,6 +11,8 @@ const entries = entrys.entries; // 入口js文件信息
 const pages = entrys.htmlPlugins; // 生成html文件的集合
 
 
+
+
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
@@ -32,6 +34,7 @@ const baseConfig = {
     rules: [{
         test: /\.js$/,
         use: ['babel-loader'],
+        include: [resolve('src'), resolve('node_modules/webpack-dev-server/client')],
         exclude: '/node_modules',
       },
       {
@@ -43,16 +46,13 @@ const baseConfig = {
           fallback: 'style-loader',
           // use: ['css-loader', 'postcss-loader', 'less-loader'],
           use: [{
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              minimize: true,
-            }
-          }, {
-            loader: 'postcss-loader'
-          }, {
-            loader: 'less-loader'
-          }],
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                minimize: true,
+              }
+            }, 'postcss-loader','less-loader'
+          ],
           publicPath: '../' //解决css背景图的路径问题
         }),
       }, {
@@ -60,13 +60,17 @@ const baseConfig = {
         use: [{
           loader: 'url-loader',
           options: { // options选项参数可以定义多大的图片转换为base64
-            limit: 10000, // 表示小于50kb的图片转为base64,大于50kb的是路径
-            outputPath: 'images', // 定义输出的图片文件夹
+            limit: 10000,
+            name: 'images/[name].[ext]',
           }
         }]
       }, {
         test: /\.(woff2|eot|ttf|woff)(\?.*)?$/,
-        use: 'file-loader'
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'fonts/[name].[hash:7].[ext]'
+        }
       }
     ]
   },
@@ -80,8 +84,8 @@ const baseConfig = {
     }),
     new CopyWebpackPlugin([ //支持输入一个数组, 静态资源引入拷贝
       {
-        from: resolve('src/images'), //将src/assets下的文件
-        to: './images' // 复制到dist目录下的assets文件夹中
+        from: resolve('src/assets'), //将src/assets下的文件
+        to: './assets' // 复制到dist目录下的assets文件夹中
       }
     ]),
     new webpack.ProvidePlugin({ //下载Jquery库
