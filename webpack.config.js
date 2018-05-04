@@ -20,7 +20,7 @@ const baseConfig = {
   devtool: 'inline-source-map', // eval 用于开发环境 生成环境用source-map
   // 1.入口配置
   entry: Object.assign(entries, {
-    'vendor': ['jquery', './src/common/common.js', ], // 用到什么公共lib（例如jquery.js），就把它加进vendor去，目的是将公用库单独提取打包
+    'vendor': ['jquery', './src/common/main.js', ], // 用到什么公共lib（例如jquery.js），就把它加进vendor去，目的是将公用库单独提取打包
   }),
   // 2.输出配置
   output: {
