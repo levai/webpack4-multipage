@@ -5,6 +5,7 @@ const merge = require('webpack-merge'); // 多页面处理
 const CleanWebpackPlugin = require('clean-webpack-plugin'); // 引入自动删除指定目录插件
 const ExtractTextPlugin = require('extract-text-webpack-plugin'); // 引入提取CSS样式 插件
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // 引入静态资源拷贝插件
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;// 分析打包文件
 
 const entrys = require('./entry.config'); // 加载入口文件
 const entries = entrys.entries; // 入口js文件信息
@@ -81,6 +82,7 @@ const baseConfig = {
   },
   // 4.插件配置
   plugins: [
+    new BundleAnalyzerPlugin(),
     new webpack.HotModuleReplacementPlugin(), // 配置热更新
     new CleanWebpackPlugin(resolve('dist')), // 自动删除指定目录文件配置
     new ExtractTextPlugin({ // 提取css
@@ -98,7 +100,6 @@ const baseConfig = {
       jQuery: 'jquery',
     }),
     new webpack.BannerPlugin('版权所有，翻版必究!')
-
   ],
 
   // 5.提取公共代码
