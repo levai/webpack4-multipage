@@ -1,5 +1,5 @@
 
-import './styles/reset.less'
+import './styles/main.less'
 import './js/alert'
 import data from '../data/a.json'
 console.log(data)

@@ -3,7 +3,7 @@
 
 
 
-import '../css/about.css'
+import '../css/about'
 console.error('I get called from print.js!');
 
 import aa from '../data/a.json'

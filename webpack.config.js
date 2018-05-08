@@ -19,6 +19,9 @@ function resolve(dir) {
 
 // webpack基本配置
 const baseConfig = {
+  resolve: {
+    "extensions": ['.js', '.css', '.json', '.less'] //可以省略后缀名
+  },
   devtool: 'inline-source-map', // eval 用于开发环境 生成环境用source-map
   // 1.入口配置
   entry: Object.assign(entries, {
@@ -34,7 +37,10 @@ const baseConfig = {
     rules: [{
         test: /\.js$/,
         use: ['babel-loader'],
-        include: [resolve('src'), resolve('node_modules/webpack-dev-server/client')],
+        include: [
+          resolve('src'),
+          resolve('node_modules/webpack-dev-server/client')
+        ],
         exclude: '/node_modules',
       },
       {
@@ -46,13 +52,12 @@ const baseConfig = {
           fallback: 'style-loader',
           // use: ['css-loader', 'postcss-loader', 'less-loader'],
           use: [{
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                minimize: true,
-              }
-            }, 'postcss-loader','less-loader'
-          ],
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              minimize: true,
+            }
+          }, 'postcss-loader', 'less-loader'],
           publicPath: '../' //解决css背景图的路径问题
         }),
       }, {
