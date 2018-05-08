@@ -452,7 +452,4 @@ new Webpack.ProvidePlugin({ //下载Jquery库
 })
 ```
 >> 
-## `17.
-![0.qr5fxo0do1](/:storage/0.qr5fxo0do1.png)
-
 
