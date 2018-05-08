@@ -1,7 +1,6 @@
 
 
-
-
+import './css/abu'
 
 import '../css/about'
 console.error('I get called from print.js!');
