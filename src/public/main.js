@@ -1,9 +1,6 @@
 
-import './common.less'
-$('body').click(function(){
-  console.log('asdasdasdasd')
-  alert(1)
-})
+import './styles/reset.less'
+import './js/alert'
 import data from '../data/a.json'
 console.log(data)
 
